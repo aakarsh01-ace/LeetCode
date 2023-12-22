@@ -7,11 +7,11 @@ public:
       unordered_map<char, int> smap;
       unordered_map<char, int> tmap;
 
-      for(int i = 0; i < s.size(); i++){
+      for(int i=0; i<s.size(); i++){
           smap[s[i]]++;
           tmap[t[i]]++;
       }
-      for(int i = 0; i < smap.size(); i++){
+      for(int i=0; i<smap.size(); i++){
           if(smap[i] != tmap[i]) return false;
       }
       return true;
