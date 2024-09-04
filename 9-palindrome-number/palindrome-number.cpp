@@ -2,20 +2,15 @@ class Solution {
 public:
     bool isPalindrome(int x) {
         if(x<0) return false;
-        long rev = 0;
-        int y=x;
+        long reverse = 0;
+        int y = x;
+
         while(y>0){
-            int ld = y%10;
-            rev = (rev*10)+ld;
-            y/=10;
+            int z = y%10;
+            reverse = (reverse*10) + z;
+            y = y/10;
         }
-        // if(rev==x){
-        //     cout<<"true";
-        // }else{
-        //     cout<<"false";
-        // }
-
-
-        return rev==x;
+        if(reverse == x) return true;
+        else return false;
     }
 };
