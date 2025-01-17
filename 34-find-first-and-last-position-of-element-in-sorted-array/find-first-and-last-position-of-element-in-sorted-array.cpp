@@ -1,40 +1,48 @@
 class Solution {
 public:
-    int lowerbound(vector<int>& nums, int target){
+    int First(vector<int>& nums, int target){
         int n = nums.size();
-        int low = 0, high = n - 1;
-        int ans = n;
-        while(low <= high){
-            int mid = (low + high) / 2;
-            if(nums[mid] >= target){
-                ans = mid;
-                high = mid - 1;
+        int left = 0, right = n - 1;
+        int result = -1;
+
+        while(left <= right){
+            int mid = left + (right - left) / 2;
+            if(nums[mid] == target){
+                result = mid;
+                right = mid - 1;
+            }else if(target > nums[mid]){
+                left = mid + 1;
             }else{
-                low = mid + 1;
+                right = mid - 1;
             }
         }
-        return ans;
+        return result;
     }
-    
-    int upperbound(vector<int>& nums, int target){
+
+    int Last(vector<int>& nums, int target){
         int n = nums.size();
-        int low = 0, high = n - 1;
-        int ans = n;
-        while(low <= high){
-            int mid = (low + high) / 2;
-            if(nums[mid] > target){
-                ans = mid;
-                high = mid - 1;
+        int left = 0, right = n - 1;
+        int result = -1;
+
+        while(left <= right){
+            int mid = left + (right - left) / 2;
+            if(nums[mid] == target){
+                result = mid;
+                left = mid + 1;
+            }else if(target < nums[mid]){
+                right = mid - 1;
             }else{
-                low = mid + 1;
+                left = mid + 1;
             }
         }
-        return ans;
+        return result;
     }
     vector<int> searchRange(vector<int>& nums, int target) {
-        int n = nums.size();
-        int lb = lowerbound(nums, target);
-        if(lb == n || nums[lb] != target) return {-1, -1};
-        return {lb, upperbound(nums, target) - 1};
+        int F = First(nums, target);
+        int L = Last(nums, target);
+        vector<int> resultant;
+        resultant.push_back(F);
+        resultant.push_back(L);
+        return resultant;
     }
 };
